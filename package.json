@@ -1,0 +1,149 @@
+{
+  "name": "vscode-up",
+  "displayName": "UP Language Support",
+  "description": "Language support for UP (Unified Properties) including syntax highlighting and LSP integration",
+  "version": "0.1.0",
+  "publisher": "uplang",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uplang/vscode-up"
+  },
+  "bugs": {
+    "url": "https://github.com/uplang/vscode-up/issues"
+  },
+  "homepage": "https://uplang.org",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Formatters"
+  ],
+  "keywords": [
+    "up",
+    "unified properties",
+    "configuration",
+    "data format"
+  ],
+  "icon": "images/icon.png",
+  "activationEvents": [
+    "onLanguage:up"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "up",
+        "aliases": [
+          "UP",
+          "Unified Properties"
+        ],
+        "extensions": [
+          ".up",
+          ".up-schema"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/file-icon.svg",
+          "dark": "./images/file-icon.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "up",
+        "scopeName": "source.up",
+        "path": "./syntaxes/up.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "UP",
+      "properties": {
+        "up.languageServer.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable UP language server"
+        },
+        "up.languageServer.path": {
+          "type": "string",
+          "default": "up-language-server",
+          "description": "Path to UP language server executable"
+        },
+        "up.languageServer.args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Arguments to pass to the language server"
+        },
+        "up.languageServer.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server"
+        },
+        "up.format.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable formatting"
+        },
+        "up.validation.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable validation"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "up.restartLanguageServer",
+        "title": "Restart Language Server",
+        "category": "UP"
+      },
+      {
+        "command": "up.showOutputChannel",
+        "title": "Show Output Channel",
+        "category": "UP"
+      }
+    ],
+    "configurationDefaults": {
+      "[up]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true,
+        "editor.semanticHighlighting.enabled": true
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.50.0",
+    "typescript": "^5.6.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  }
+}
+

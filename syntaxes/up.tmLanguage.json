@@ -1,0 +1,134 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "UP",
+  "scopeName": "source.up",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#key-value" },
+    { "include": "#blocks" },
+    { "include": "#lists" },
+    { "include": "#tables" },
+    { "include": "#multiline" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.up",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "key-value": {
+      "patterns": [
+        {
+          "match": "^\\s*([a-zA-Z_][a-zA-Z0-9_-]*)(!([a-zA-Z0-9_]+))?(\\s+(.+))?$",
+          "captures": {
+            "1": { "name": "variable.other.key.up" },
+            "2": { "name": "storage.type.annotation.up" },
+            "3": { "name": "entity.name.type.up" },
+            "5": { "name": "string.unquoted.value.up" }
+          }
+        }
+      ]
+    },
+    "blocks": {
+      "patterns": [
+        {
+          "name": "meta.block.up",
+          "begin": "\\{",
+          "end": "\\}",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.block.begin.up" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.block.end.up" }
+          },
+          "patterns": [
+            { "include": "#comments" },
+            { "include": "#key-value" },
+            { "include": "#blocks" },
+            { "include": "#lists" }
+          ]
+        }
+      ]
+    },
+    "lists": {
+      "patterns": [
+        {
+          "name": "meta.list.up",
+          "begin": "\\[",
+          "end": "\\]",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.list.begin.up" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.list.end.up" }
+          },
+          "patterns": [
+            { "include": "#comments" },
+            { "include": "#blocks" },
+            { "include": "#lists" },
+            {
+              "name": "string.unquoted.list-item.up",
+              "match": "[^\\[\\]\\{\\}#\\s]+"
+            }
+          ]
+        },
+        {
+          "name": "meta.list.inline.up",
+          "match": "\\[(.*?)\\]",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "name": "string.unquoted.list-item.up",
+                  "match": "[^,\\s]+"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "tables": {
+      "patterns": [
+        {
+          "match": "^\\s*(columns|rows)(!table)?",
+          "captures": {
+            "1": { "name": "keyword.control.table.up" },
+            "2": { "name": "storage.type.annotation.up" }
+          }
+        }
+      ]
+    },
+    "multiline": {
+      "patterns": [
+        {
+          "name": "string.quoted.triple.up",
+          "begin": "```([a-zA-Z0-9]*)?",
+          "end": "```",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.up" },
+            "1": { "name": "entity.name.tag.language-hint.up" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.up" }
+          }
+        }
+      ]
+    },
+    "namespace-calls": {
+      "patterns": [
+        {
+          "match": "^\\s*([a-zA-Z_][a-zA-Z0-9_-]*):([a-zA-Z_][a-zA-Z0-9_]*)",
+          "captures": {
+            "1": { "name": "support.class.namespace.up" },
+            "2": { "name": "entity.name.function.up" }
+          }
+        }
+      ]
+    }
+  }
+}
+
