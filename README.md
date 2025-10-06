@@ -1,6 +1,16 @@
 # UP Language Support for VS Code
 
+[![CI](https://github.com/uplang/vscode-up/actions/workflows/ci.yml/badge.svg)](https://github.com/uplang/vscode-up/actions/workflows/ci.yml)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/uplang.vscode-up)](https://marketplace.visualstudio.com/items?itemName=uplang.vscode-up)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 Official Visual Studio Code extension for [UP (Unified Properties)](https://uplang.org) language support.
+
+**Quick Links:**
+- 📦 [Install from Marketplace](https://marketplace.visualstudio.com/items?itemName=uplang.vscode-up)
+- 📖 [Documentation](#features)
+- 🔧 [Development](#development)
+- 🐛 [Report Issues](https://github.com/uplang/vscode-up/issues)
 
 ## Features
 
